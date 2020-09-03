@@ -202,10 +202,10 @@ function create () {
     tank.bringToTop();
     turret.bringToTop();
 
-    logo = game.add.sprite(0, 200, 'logo');
-    logo.fixedToCamera = true;
+    //logo = game.add.sprite(0, 200, 'logo');
+    //logo.fixedToCamera = true;
 
-    game.input.onDown.add(removeLogo, this);
+   // game.input.onDown.add(removeLogo, this);
 
     game.camera.follow(tank);
     game.camera.deadzone = new Phaser.Rectangle(150, 150, 500, 300);
@@ -243,6 +243,11 @@ function update () {
             game.physics.arcade.overlap(bullets, enemies[i].tank, bulletHitEnemy, null, this);
             enemies[i].update();
         }
+    }
+
+    if(enemiesAlive ==0){
+    	game.state.restart()
+
     }
 
     if (leftKey.isDown)
@@ -331,7 +336,10 @@ function fire () {
 
 function render () {
 
-    // game.debug.text('Active Bullets: ' + bullets.countLiving() + ' / ' + bullets.length, 32, 32);
+     game.debug.text('Active Bullets: ' + bullets.countLiving() + ' / ' + bullets.length, 32, 65);
     game.debug.text('Enemies: ' + enemiesAlive + ' / ' + enemiesTotal, 32, 32);
+        //game.debug.body(tank);
+        game.debug.bodyInfo(tank,32,500);
+
 
 }
